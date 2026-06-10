@@ -8,16 +8,24 @@ a $50,000/year token budget.
 
 ## Quick start
 
+Requires only Python 3.8+ — **no packages, no API key, no setup**:
+
 ```
-python3 src/pipeline.py        # no dependencies needed in mock mode
+python3 src/pipeline.py        # Windows: py src\pipeline.py
 ```
+
+Then **open `outputs/dashboard.html` in your browser** to see the full result:
+attention list, risk briefs, issue routing with escalations, check-in briefs,
+quality verdicts, the intervention plan, and token/cost telemetry.
+(A pre-generated copy is already committed, so you can open it without
+running anything.)
 
 With `ANTHROPIC_API_KEY` set (and `pip install anthropic`), the same pipeline
 calls the Claude API with prompt caching enabled; without a key it runs a
 deterministic mock LLM so the full workflow — routing, guardrails, evals,
 escalation, token/cost accounting — executes end-to-end offline.
 
-Artifacts land in `outputs/`:
+Other artifacts in `outputs/`:
 `01_account_review.json` … `06_intervention.json`, `usage_log.csv` (per-call
 tokens + cost), `run_report.md` (per-stage rollup + annual budget projection).
 

@@ -366,6 +366,9 @@ def main():
 
     runner.log.write_csv(os.path.join(OUT, "usage_log.csv"))
     tot_list, tot_eff, annual = write_report(runner, meta)
+    from dashboard import build_dashboard
+    dash = build_dashboard(OUT)
+    print(f"Dashboard: open {os.path.relpath(dash, os.getcwd())} in a browser")
     print(f"\nTokens+cost: list ${tot_list:.4f} | effective ${tot_eff:.4f} per full cycle")
     print(f"Annual projection at 750-account scale: ${annual:,.2f} vs $50,000 budget")
     print(f"Artifacts: outputs/*.json, outputs/usage_log.csv, outputs/run_report.md")
