@@ -1,6 +1,6 @@
 """Configuration: model routing tiers, pricing, and annual volume assumptions.
 
-Pricing values mirror the Token Math Sheet (TOKEN_MATH.md). All costs are
+Pricing values mirror the Token Math Sheet (COSTS.md). All costs are
 USD per million tokens. The batch discount and cache-read multiplier are
 applied by the usage logger when a call is marked batchable / cache-hit.
 """

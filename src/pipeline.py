@@ -303,10 +303,10 @@ def write_report(runner, stage_meta):
     lines += [f"| **TOTAL projected** | | | | | **${annual_total:,.2f}** |", "",
               f"Budget: $50,000/yr -> projected core spend ${annual_total:,.0f} "
               f"({annual_total / 50000:.1%} of budget). Remaining headroom funds retries, "
-              "context growth, eval sampling, and surge volume (see TOKEN_MATH.md).", "",
+              "context growth, eval sampling, and surge volume (see COSTS.md).", "",
               "Caveat: this synthetic dataset's records are small, so measured per-unit "
               "context is ~5-10x below the production context budgets assumed in "
-              "TOKEN_MATH.md (which prices full CRM/usage/ticket history per account). "
+              "COSTS.md (which prices full CRM/usage/ticket history per account). "
               "Treat this projection as a lower bound; the Token Math Sheet is the "
               "budget-of-record.", "",
               "## Reliability events this run", ""]

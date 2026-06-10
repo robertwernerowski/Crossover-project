@@ -71,7 +71,7 @@ First end-to-end run worked but surfaced two real issues from the output:
    (priced but never measured). Generalized the proxy-pricing so unmeasured
    stages are priced from the closest-shaped measured call, and added an
    explicit caveat that the small synthetic rows make measured context a
-   lower bound vs the production-sized budgets in TOKEN_MATH.md.
+   lower bound vs the production-sized budgets in COSTS.md.
 
 Verified the interesting events in the committed run: guardrail override on
 T003 (renewal in 19 days, health 52 — model said `scheduled_follow_up`,

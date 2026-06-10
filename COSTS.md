@@ -1,4 +1,4 @@
-# Submission A — Token Math Sheet
+# Cost Reference — Token & Model Cost Math
 
 AI system for senior customer success operations: 750-account B2B SaaS portfolio,
 $50,000/year token budget.

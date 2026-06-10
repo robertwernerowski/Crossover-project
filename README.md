@@ -1,8 +1,10 @@
-# Customer Success AI Workflow — Submission B
+# Customer Success AI Workflow
 
-A runnable end-to-end simulation of an AI system that handles the core
-operational work of a senior customer success function for a ~750-account
-B2B SaaS portfolio, within a $50,000/year token budget.
+A runnable end-to-end AI system that handles the core operational work of a
+senior customer success function for a ~750-account B2B SaaS portfolio:
+daily account review, prioritization, inbound issue handling, customer
+check-in support, output quality review, and targeted interventions — within
+a $50,000/year token budget.
 
 ## Quick start
 
@@ -18,6 +20,36 @@ escalation, token/cost accounting — executes end-to-end offline.
 Artifacts land in `outputs/`:
 `01_account_review.json` … `06_intervention.json`, `usage_log.csv` (per-call
 tokens + cost), `run_report.md` (per-stage rollup + annual budget projection).
+
+## Model selection — the core design decision
+
+The system's economics and quality both follow from **matching each task to
+the cheapest model that is reliably good at it**, with deterministic code
+(free) underneath everything. Pricing reference: [COSTS.md](COSTS.md).
+
+| Tier | Model | $/MTok in/out | Used for | Why this model |
+|---|---|---|---|---|
+| 0 | none (Python rules) | $0 | Screening all 750 accounts/day, escalation floors, segment detection | Health deltas, ticket counts, and renewal windows are arithmetic, not judgment. Running an LLM over the whole portfolio daily would multiply cost ~5x for zero added signal. |
+| 1 | **Haiku 4.5** | $1 / $5 | Per-account risk briefs (~150/day), inbound issue triage (30/wk), 24/7 alert triage (~40/day) | These are bounded classification/summarization tasks with a strict JSON schema — exactly what a small fast model does well. Volume lives here: ~93% of all calls. Sent via **Batch API (−50%)** where latency doesn't matter (overnight account review). |
+| 2 | **Sonnet 4.6** | $3 / $15 | Portfolio prioritization (1/day), check-in briefs + follow-ups (24/wk), quality review judging (20/wk), escalation packets (~10/wk) | These need cross-document synthesis, judgment against standards, and customer-ready prose. Haiku measurably under-performs on multi-source reasoning; Opus adds cost without changing the verdicts on tasks this bounded. |
+| 3 | **Opus 4.8** | $5 / $25 | Biweekly intervention design (26/yr), shadow-judging 10% of tier-1/2 verdicts | Highest-stakes, lowest-volume work: a wrong intervention burns two weeks across a whole segment. At 26 designs/year, the Opus premium costs ~$4/yr total — quality per dollar is unbeatable here. |
+
+Three cost levers applied on top of routing (all measured in `run_report.md`):
+
+1. **Prompt caching** — per-stage system prompts are frozen (see
+   `src/prompts.py`); all volatile account context goes in the user turn, so
+   the prefix is a 0.1x cache read after the first call.
+2. **Batch API** — the daily account review is overnight work → 50% off.
+3. **Escalation asymmetry** — cheap models are allowed to say "not sure":
+   schema failures and guardrail triggers route up (to Sonnet packets or
+   humans), never silently down.
+
+**Result** (from [COSTS.md](COSTS.md), the budget-of-record): baseline ≈
+**$392/yr (<1% of the $50k budget)**; a premium configuration (4x context,
+Opus on all synthesis) ≈ $1.6k/yr; 10x portfolio growth ≈ $3.3k/yr. The
+binding constraint is human review capacity, not tokens — so the budget is
+allocated to an eval program and surge reserve rather than burned on
+unnecessarily large models.
 
 ## Architecture
 
@@ -63,7 +95,7 @@ tokens + cost), `run_report.md` (per-stage rollup + annual budget projection).
 | S4 `checkin_prep` | Customer check-ins | Sonnet builds the meeting brief from account record, usage trend, open tickets and the prior call note. A continuity eval verifies every unresolved follow-up item from the last call appears in the brief (12/12 pass in the committed run). |
 | S5 `quality_review` | Output quality review | Sonnet judges each junior draft standard-by-standard against `quality_standards.csv` → approve / revise (with instructions) / block_and_escalate. A heuristic cross-check flags judge-vs-rules disagreements for human spot review. |
 | S6 `interventions` | Targeted interventions | Tier-0 detection finds the declining segment (health drop ≥15: A004, A008, A014, A017); Opus designs the corrective play with per-account first steps and a measurement plan (baselines, targets, checkpoint date, iterate/stop/expand decision rule). |
-| 24/7 | Monitoring & intake | Architecture: event stream (health deltas, usage anomalies, new tickets) → tier-0 filter → Haiku alert triage → same three routing paths. Priced in TOKEN_MATH.md (W8); the triage stage demonstrates the identical call shape. |
+| 24/7 | Monitoring & intake | Architecture: event stream (health deltas, usage anomalies, new tickets) → tier-0 filter → Haiku alert triage → same three routing paths. Priced in COSTS.md (W8); the triage stage demonstrates the identical call shape. |
 
 ### Reliability & evaluation design
 
@@ -82,26 +114,16 @@ tokens + cost), `run_report.md` (per-stage rollup + annual budget projection).
 5. **Cost telemetry** — every call logged with stage, model, tokens, list vs
    effective cost; the report projects annual spend against the $50k budget.
 
-### Budget discipline (full math in TOKEN_MATH.md)
-
-- **Tiering**: the population scan is free; Haiku does volume; Sonnet does
-  judgment; Opus is reserved for 26 high-stakes designs/year.
-- **Prompt caching**: stable per-stage system prompts → cached prefix reads.
-- **Batch API**: the daily review is overnight-batchable → 50% off.
-- Result: baseline ≈ $392/yr (<1% of budget); premium configuration ≈ $1.6k;
-  budget headroom funds the eval program, surge reserve, and 10x growth.
-
 ## Repo map
 
 ```
 data/         provided synthetic dataset (8 CSVs/MD)
-src/config.py    models, pricing, annual volume assumptions
+src/config.py    model tiers, pricing, annual volume assumptions
 src/prompts.py   per-stage system prompts (stable → cacheable)
 src/llm.py       LLM runner: real API or mock, retry, usage/cost log
 src/evals.py     schema validators, guardrails, cross-checks
 src/mocks.py     deterministic offline response generators
 src/pipeline.py  orchestrator (entry point)
 outputs/      committed artifacts from the run described above
-TOKEN_MATH.md    Submission A — token math sheet
-SESSION_LOG.md   Submission C — Claude Code session log
+COSTS.md      cost reference: cell-by-cell token math behind the model choices
 ```

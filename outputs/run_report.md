@@ -32,9 +32,9 @@ Effective cost applies prompt caching (0.1x on cached prefix reads, 1.25x first 
 | checkin_followup (check-in follow-up summaries (12/week)) | 624 | ~same as checkin_prep | | $0.00381 | $2.38 |
 | **TOTAL projected** | | | | | **$41.55** |
 
-Budget: $50,000/yr -> projected core spend $42 (0.1% of budget). Remaining headroom funds retries, context growth, eval sampling, and surge volume (see TOKEN_MATH.md).
+Budget: $50,000/yr -> projected core spend $42 (0.1% of budget). Remaining headroom funds retries, context growth, eval sampling, and surge volume (see COSTS.md).
 
-Caveat: this synthetic dataset's records are small, so measured per-unit context is ~5-10x below the production context budgets assumed in TOKEN_MATH.md (which prices full CRM/usage/ticket history per account). Treat this projection as a lower bound; the Token Math Sheet is the budget-of-record.
+Caveat: this synthetic dataset's records are small, so measured per-unit context is ~5-10x below the production context budgets assumed in COSTS.md (which prices full CRM/usage/ticket history per account). Treat this projection as a lower bound; the Token Math Sheet is the budget-of-record.
 
 ## Reliability events this run
 
