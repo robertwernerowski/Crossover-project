@@ -1,0 +1,221 @@
+{
+  "routes": [
+    {
+      "ticket_id": "T001",
+      "route": "escalate",
+      "priority": "P1",
+      "reasoning": "High severity, frustrated sentiment, status open",
+      "first_action": "Open escalation packet; CSM + support engineering joint owner within 24h",
+      "draft_reply": null,
+      "owner": "csm",
+      "final_route": "escalate",
+      "guardrail_override": null
+    },
+    {
+      "ticket_id": "T002",
+      "route": "escalate",
+      "priority": "P1",
+      "reasoning": "High severity, concerned sentiment, status open",
+      "first_action": "Open escalation packet; CSM + support engineering joint owner within 24h",
+      "draft_reply": null,
+      "owner": "csm",
+      "final_route": "escalate",
+      "guardrail_override": null
+    },
+    {
+      "ticket_id": "T003",
+      "route": "scheduled_follow_up",
+      "priority": "P2",
+      "reasoning": "Medium severity, negative sentiment, status open",
+      "first_action": "Schedule investigation with support; reply to customer with timeline today",
+      "draft_reply": null,
+      "owner": "csm",
+      "final_route": "escalate",
+      "guardrail_override": "renewal in 19d with health 52"
+    },
+    {
+      "ticket_id": "T004",
+      "route": "scheduled_follow_up",
+      "priority": "P2",
+      "reasoning": "Medium severity, neutral sentiment, status open",
+      "first_action": "Schedule investigation with support; reply to customer with timeline today",
+      "draft_reply": null,
+      "owner": "csm",
+      "final_route": "scheduled_follow_up",
+      "guardrail_override": null
+    },
+    {
+      "ticket_id": "T005",
+      "route": "immediate_resolution",
+      "priority": "P3",
+      "reasoning": "Low severity, neutral sentiment, status new",
+      "first_action": "Send tailored answer with relevant guide and offer a walkthrough",
+      "draft_reply": "Hi Lumen Energy team \u2014 thanks for reaching out about 'Customer opened several how-to questions about advanced perm...'. Here is the specific guidance for your setup, plus a short guide. Happy to do a 20-minute walkthrough this week \u2014 I have held two slots for you.",
+      "owner": "ai_system",
+      "final_route": "immediate_resolution",
+      "guardrail_override": null
+    },
+    {
+      "ticket_id": "T006",
+      "route": "escalate",
+      "priority": "P1",
+      "reasoning": "High severity, negative sentiment, status open",
+      "first_action": "Open escalation packet; CSM + support engineering joint owner within 24h",
+      "draft_reply": null,
+      "owner": "csm",
+      "final_route": "escalate",
+      "guardrail_override": null
+    },
+    {
+      "ticket_id": "T007",
+      "route": "escalate",
+      "priority": "P1",
+      "reasoning": "High severity, concerned sentiment, status new",
+      "first_action": "Open escalation packet; CSM + support engineering joint owner within 24h",
+      "draft_reply": null,
+      "owner": "csm",
+      "final_route": "escalate",
+      "guardrail_override": null
+    },
+    {
+      "ticket_id": "T008",
+      "route": "scheduled_follow_up",
+      "priority": "P2",
+      "reasoning": "Medium severity, neutral sentiment, status new",
+      "first_action": "Schedule investigation with support; reply to customer with timeline today",
+      "draft_reply": null,
+      "owner": "csm",
+      "final_route": "scheduled_follow_up",
+      "guardrail_override": null
+    },
+    {
+      "ticket_id": "T009",
+      "route": "scheduled_follow_up",
+      "priority": "P2",
+      "reasoning": "Medium severity, neutral sentiment, status open",
+      "first_action": "Schedule investigation with support; reply to customer with timeline today",
+      "draft_reply": null,
+      "owner": "csm",
+      "final_route": "scheduled_follow_up",
+      "guardrail_override": null
+    },
+    {
+      "ticket_id": "T010",
+      "route": "scheduled_follow_up",
+      "priority": "P2",
+      "reasoning": "Medium severity, frustrated sentiment, status open",
+      "first_action": "Schedule investigation with support; reply to customer with timeline today",
+      "draft_reply": null,
+      "owner": "csm",
+      "final_route": "scheduled_follow_up",
+      "guardrail_override": null
+    },
+    {
+      "ticket_id": "T011",
+      "route": "immediate_resolution",
+      "priority": "P3",
+      "reasoning": "Low severity, positive sentiment, status new",
+      "first_action": "Send tailored answer with relevant guide and offer a walkthrough",
+      "draft_reply": "Hi Futura Robotics team \u2014 thanks for reaching out about 'Customer asks about premium automation feature limits...'. Here is the specific guidance for your setup, plus a short guide. Happy to do a 20-minute walkthrough this week \u2014 I have held two slots for you.",
+      "owner": "ai_system",
+      "final_route": "immediate_resolution",
+      "guardrail_override": null
+    },
+    {
+      "ticket_id": "T012",
+      "route": "immediate_resolution",
+      "priority": "P3",
+      "reasoning": "Low severity, positive sentiment, status new",
+      "first_action": "Send tailored answer with relevant guide and offer a walkthrough",
+      "draft_reply": "Hi Cobalt Health team \u2014 thanks for reaching out about 'Analytics team asks for best-practice setup for new departme...'. Here is the specific guidance for your setup, plus a short guide. Happy to do a 20-minute walkthrough this week \u2014 I have held two slots for you.",
+      "owner": "ai_system",
+      "final_route": "immediate_resolution",
+      "guardrail_override": null
+    }
+  ],
+  "escalation_packets": [
+    {
+      "ticket_id": "T001",
+      "account_id": "A008",
+      "severity_assessment": "High severity on Enterprise account, health 48, sentiment frustrated",
+      "revenue_at_risk_usd": 240000,
+      "recommended_owner": "CSM + support engineering",
+      "talking_points": [
+        "Acknowledge: Executive sponsor says implementation is blocked by SSO failures",
+        "Commit to a named owner and a dated next update",
+        "Renewal context: 2026-06-12 \u2014 protect the relationship now"
+      ],
+      "deadline": "next business day",
+      "fallback_plan": "If unresolved in 5 business days, exec-to-exec call and remediation credit review"
+    },
+    {
+      "ticket_id": "T002",
+      "account_id": "A002",
+      "severity_assessment": "High severity on Enterprise account, health 61, sentiment concerned",
+      "revenue_at_risk_usd": 128000,
+      "recommended_owner": "CSM + support engineering",
+      "talking_points": [
+        "Acknowledge: Customer asks why integration sync has failed three times this week",
+        "Commit to a named owner and a dated next update",
+        "Renewal context: 2026-06-30 \u2014 protect the relationship now"
+      ],
+      "deadline": "next business day",
+      "fallback_plan": "If unresolved in 5 business days, exec-to-exec call and remediation credit review"
+    },
+    {
+      "ticket_id": "T003",
+      "account_id": "A014",
+      "severity_assessment": "Medium severity on Mid-Market account, health 52, sentiment negative",
+      "revenue_at_risk_usd": 83000,
+      "recommended_owner": "CSM + leadership sponsor",
+      "talking_points": [
+        "Acknowledge: Admin reports mobile users cannot complete onboarding steps",
+        "Commit to a named owner and a dated next update",
+        "Renewal context: 2026-05-20 \u2014 protect the relationship now"
+      ],
+      "deadline": "next business day",
+      "fallback_plan": "If unresolved in 5 business days, exec-to-exec call and remediation credit review"
+    },
+    {
+      "ticket_id": "T006",
+      "account_id": "A017",
+      "severity_assessment": "High severity on SMB account, health 46, sentiment negative",
+      "revenue_at_risk_usd": 16000,
+      "recommended_owner": "CSM + leadership sponsor",
+      "talking_points": [
+        "Acknowledge: Customer says team has stopped using the platform and needs a reset",
+        "Commit to a named owner and a dated next update",
+        "Renewal context: 2026-07-22 \u2014 protect the relationship now"
+      ],
+      "deadline": "next business day",
+      "fallback_plan": "If unresolved in 5 business days, exec-to-exec call and remediation credit review"
+    },
+    {
+      "ticket_id": "T007",
+      "account_id": "A005",
+      "severity_assessment": "High severity on Enterprise account, health 67, sentiment concerned",
+      "revenue_at_risk_usd": 175000,
+      "recommended_owner": "CSM + leadership sponsor",
+      "talking_points": [
+        "Acknowledge: Executive sponsor requests renewal usage summary by Friday",
+        "Commit to a named owner and a dated next update",
+        "Renewal context: 2026-05-28 \u2014 protect the relationship now"
+      ],
+      "deadline": "next business day",
+      "fallback_plan": "If unresolved in 5 business days, exec-to-exec call and remediation credit review"
+    }
+  ],
+  "validation_failures": [],
+  "route_counts": {
+    "immediate_resolution": 3,
+    "scheduled_follow_up": 4,
+    "escalate": 5
+  },
+  "guardrail_overrides": [
+    {
+      "ticket_id": "T003",
+      "model_route": "scheduled_follow_up",
+      "reason": "renewal in 19d with health 52"
+    }
+  ]
+}

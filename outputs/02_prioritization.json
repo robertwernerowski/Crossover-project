@@ -1,0 +1,107 @@
+{
+  "attention_list": [
+    {
+      "account_id": "A008",
+      "rank": 1,
+      "reason": "high risk, $240,000 ARR, renewal in 42d",
+      "owner_action": "Same-week save plan: CSM call within 48h, address 'health score critical at 48'"
+    },
+    {
+      "account_id": "A014",
+      "rank": 2,
+      "reason": "high risk, $83,000 ARR, renewal in 19d",
+      "owner_action": "Same-week save plan: CSM call within 48h, address 'health score critical at 52'"
+    },
+    {
+      "account_id": "A005",
+      "rank": 3,
+      "reason": "medium risk, $175,000 ARR, renewal in 27d",
+      "owner_action": "Add to weekly watchlist; targeted enablement outreach this week"
+    },
+    {
+      "account_id": "A002",
+      "rank": 4,
+      "reason": "high risk, $128,000 ARR, renewal in 60d",
+      "owner_action": "Same-week save plan: CSM call within 48h, address 'health score weak at 61'"
+    },
+    {
+      "account_id": "A017",
+      "rank": 5,
+      "reason": "high risk, $16,000 ARR, renewal in 82d",
+      "owner_action": "Same-week save plan: CSM call within 48h, address 'health score critical at 46'"
+    },
+    {
+      "account_id": "A010",
+      "rank": 6,
+      "reason": "medium risk, $74,000 ARR, renewal in 62d",
+      "owner_action": "Add to weekly watchlist; targeted enablement outreach this week"
+    },
+    {
+      "account_id": "A004",
+      "rank": 7,
+      "reason": "high risk, $18,000 ARR, renewal in 111d",
+      "owner_action": "Same-week save plan: CSM call within 48h, address 'health score critical at 54'"
+    },
+    {
+      "account_id": "A012",
+      "rank": 8,
+      "reason": "medium risk, $190,000 ARR, renewal in 96d",
+      "owner_action": "Add to weekly watchlist; targeted enablement outreach this week"
+    }
+  ],
+  "expansion_watchlist": [
+    {
+      "account_id": "A003",
+      "signal": "expansion_signal=high, health 88"
+    },
+    {
+      "account_id": "A006",
+      "signal": "expansion_signal=high, health 82"
+    },
+    {
+      "account_id": "A011",
+      "signal": "expansion_signal=high, health 84"
+    },
+    {
+      "account_id": "A015",
+      "signal": "expansion_signal=high, health 79"
+    },
+    {
+      "account_id": "A018",
+      "signal": "expansion_signal=high, health 86"
+    }
+  ],
+  "portfolio_patterns": [
+    {
+      "pattern": "Sharp health-score declines (>=15 pts) clustered in accounts with champion loss or implementation blockers",
+      "accounts": [
+        "A004",
+        "A008",
+        "A014",
+        "A017"
+      ],
+      "suggested_response": "Launch a save-segment intervention (see biweekly intervention stage)"
+    },
+    {
+      "pattern": "Rising support-ticket volume on integration/permissions topics",
+      "accounts": [
+        "A002",
+        "A008",
+        "A010",
+        "A012",
+        "A017"
+      ],
+      "suggested_response": "Coordinate with support engineering on a root-cause sweep; publish a permissions enablement guide"
+    },
+    {
+      "pattern": "Multiple at-risk renewals inside 60 days",
+      "accounts": [
+        "A002",
+        "A005",
+        "A008",
+        "A014"
+      ],
+      "suggested_response": "Prepare renewal value snapshots and exec outreach for each"
+    }
+  ]
+}

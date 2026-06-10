@@ -1,0 +1,352 @@
+[
+  {
+    "checkin_id": "C001",
+    "account_id": "A008",
+    "objectives": [
+      "Advance: SSO status",
+      "Confirm owner + dated next steps"
+    ],
+    "continuity_items": [
+      {
+        "item": "CSM to coordinate technical escalation",
+        "status": "open \u2014 verify before call"
+      }
+    ],
+    "talking_points": [
+      "Topic: SSO status",
+      "Topic: rollout unblock plan",
+      "Topic: executive confidence",
+      "Usage trend: declining; health 48 (was 66)",
+      "Open ticket T001: Executive sponsor says implementation is blocked by SSO failures"
+    ],
+    "risks_to_address": [
+      "High-value account with severe implementation blockers"
+    ],
+    "success_criteria": "Customer agrees to a dated plan on 'SSO status' and confirms engagement before renewal 2026-06-12",
+    "post_call_actions": [
+      "Send recap within 4h with owners/dates",
+      "Update health watchlist and schedule follow-up checkpoint"
+    ],
+    "_continuity_check": "pass"
+  },
+  {
+    "checkin_id": "C002",
+    "account_id": "A005",
+    "objectives": [
+      "Advance: ROI summary",
+      "Confirm owner + dated next steps"
+    ],
+    "continuity_items": [
+      {
+        "item": "Prepare renewal value snapshot",
+        "status": "open \u2014 verify before call"
+      }
+    ],
+    "talking_points": [
+      "Topic: ROI summary",
+      "Topic: adoption proof",
+      "Topic: renewal risk",
+      "Usage trend: declining; health 67 (was 76)",
+      "Open ticket T007: Executive sponsor requests renewal usage summary by Friday"
+    ],
+    "risks_to_address": [
+      "Renewal soon; exec sponsor requested usage review"
+    ],
+    "success_criteria": "Customer agrees to a dated plan on 'ROI summary' and confirms engagement before renewal 2026-05-28",
+    "post_call_actions": [
+      "Send recap within 4h with owners/dates",
+      "Update health watchlist and schedule follow-up checkpoint"
+    ],
+    "_continuity_check": "pass"
+  },
+  {
+    "checkin_id": "C003",
+    "account_id": "A014",
+    "objectives": [
+      "Advance: Mobile onboarding issue",
+      "Confirm owner + dated next steps"
+    ],
+    "continuity_items": [
+      {
+        "item": "Send mobile onboarding plan",
+        "status": "open \u2014 verify before call"
+      }
+    ],
+    "talking_points": [
+      "Topic: Mobile onboarding issue",
+      "Topic: renewal timeline",
+      "Usage trend: declining; health 52 (was 71)",
+      "Open ticket T003: Admin reports mobile users cannot complete onboarding steps"
+    ],
+    "risks_to_address": [
+      "Renewal imminent; adoption issue in mobile app"
+    ],
+    "success_criteria": "Customer agrees to a dated plan on 'Mobile onboarding issue' and confirms engagement before renewal 2026-05-20",
+    "post_call_actions": [
+      "Send recap within 4h with owners/dates",
+      "Update health watchlist and schedule follow-up checkpoint"
+    ],
+    "_continuity_check": "pass"
+  },
+  {
+    "checkin_id": "C004",
+    "account_id": "A003",
+    "objectives": [
+      "Advance: New department rollout",
+      "Confirm owner + dated next steps"
+    ],
+    "continuity_items": [
+      {
+        "item": "Share rollout plan",
+        "status": "open \u2014 verify before call"
+      }
+    ],
+    "talking_points": [
+      "Topic: New department rollout",
+      "Topic: best-practice setup",
+      "Usage trend: growing; health 88 (was 85)",
+      "Open ticket T012: Analytics team asks for best-practice setup for new department"
+    ],
+    "risks_to_address": [
+      "Expansion interest from analytics team"
+    ],
+    "success_criteria": "Customer agrees to a dated plan on 'New department rollout' and confirms engagement before renewal 2026-12-01",
+    "post_call_actions": [
+      "Send recap within 4h with owners/dates",
+      "Update health watchlist and schedule follow-up checkpoint"
+    ],
+    "_continuity_check": "pass"
+  },
+  {
+    "checkin_id": "C005",
+    "account_id": "A006",
+    "objectives": [
+      "Advance: Automation limits",
+      "Confirm owner + dated next steps"
+    ],
+    "continuity_items": [
+      {
+        "item": "Send premium automation options",
+        "status": "open \u2014 verify before call"
+      }
+    ],
+    "talking_points": [
+      "Topic: Automation limits",
+      "Topic: premium use cases",
+      "Usage trend: growing; health 82 (was 77)",
+      "Open ticket T011: Customer asks about premium automation feature limits"
+    ],
+    "risks_to_address": [
+      "Strong adoption; potential premium-feature expansion"
+    ],
+    "success_criteria": "Customer agrees to a dated plan on 'Automation limits' and confirms engagement before renewal 2026-09-30",
+    "post_call_actions": [
+      "Send recap within 4h with owners/dates",
+      "Update health watchlist and schedule follow-up checkpoint"
+    ],
+    "_continuity_check": "pass"
+  },
+  {
+    "checkin_id": "C006",
+    "account_id": "A010",
+    "objectives": [
+      "Advance: Reporting usage drop",
+      "Confirm owner + dated next steps"
+    ],
+    "continuity_items": [
+      {
+        "item": "Investigate data freshness issue",
+        "status": "open \u2014 verify before call"
+      }
+    ],
+    "talking_points": [
+      "Topic: Reporting usage drop",
+      "Topic: export data trust",
+      "Usage trend: declining; health 58 (was 63)",
+      "Open ticket T004: Power user wants help interpreting usage dashboard drop"
+    ],
+    "risks_to_address": [
+      "Tickets increasing; usage declining in two departments"
+    ],
+    "success_criteria": "Customer agrees to a dated plan on 'Reporting usage drop' and confirms engagement before renewal 2026-07-02",
+    "post_call_actions": [
+      "Send recap within 4h with owners/dates",
+      "Update health watchlist and schedule follow-up checkpoint"
+    ],
+    "_continuity_check": "pass"
+  },
+  {
+    "checkin_id": "C007",
+    "account_id": "A017",
+    "objectives": [
+      "Advance: Champion gap",
+      "Confirm owner + dated next steps"
+    ],
+    "continuity_items": [
+      {
+        "item": "Identify new sponsor and propose reset",
+        "status": "open \u2014 verify before call"
+      }
+    ],
+    "talking_points": [
+      "Topic: Champion gap",
+      "Topic: platform value",
+      "Topic: reactivation",
+      "Usage trend: declining; health 46 (was 64)",
+      "Open ticket T006: Customer says team has stopped using the platform and needs a reset"
+    ],
+    "risks_to_address": [
+      "Low usage and negative sentiment; unclear stakeholder owner"
+    ],
+    "success_criteria": "Customer agrees to a dated plan on 'Champion gap' and confirms engagement before renewal 2026-07-22",
+    "post_call_actions": [
+      "Send recap within 4h with owners/dates",
+      "Update health watchlist and schedule follow-up checkpoint"
+    ],
+    "_continuity_check": "pass"
+  },
+  {
+    "checkin_id": "C008",
+    "account_id": "A015",
+    "objectives": [
+      "Advance: Roadmap dependency",
+      "Confirm owner + dated next steps"
+    ],
+    "continuity_items": [
+      {
+        "item": "Escalate roadmap question to product",
+        "status": "open \u2014 verify before call"
+      }
+    ],
+    "talking_points": [
+      "Topic: Roadmap dependency",
+      "Topic: strategic relationship",
+      "Usage trend: flat; health 79 (was 77)",
+      "Open ticket T009: Platform team asks for update on integration roadmap"
+    ],
+    "risks_to_address": [
+      "Strategic account; integrations roadmap concern"
+    ],
+    "success_criteria": "Customer agrees to a dated plan on 'Roadmap dependency' and confirms engagement before renewal 2026-11-01",
+    "post_call_actions": [
+      "Send recap within 4h with owners/dates",
+      "Update health watchlist and schedule follow-up checkpoint"
+    ],
+    "_continuity_check": "pass"
+  },
+  {
+    "checkin_id": "C009",
+    "account_id": "A012",
+    "objectives": [
+      "Advance: Admin training",
+      "Confirm owner + dated next steps"
+    ],
+    "continuity_items": [
+      {
+        "item": "Provide permissions guide",
+        "status": "open \u2014 verify before call"
+      }
+    ],
+    "talking_points": [
+      "Topic: Admin training",
+      "Topic: permissions confusion",
+      "Usage trend: flat; health 63 (was 60)",
+      "Open ticket T005: Customer opened several how-to questions about advanced permissions"
+    ],
+    "risks_to_address": [
+      "Many tickets but usage remains strong"
+    ],
+    "success_criteria": "Customer agrees to a dated plan on 'Admin training' and confirms engagement before renewal 2026-08-05",
+    "post_call_actions": [
+      "Send recap within 4h with owners/dates",
+      "Update health watchlist and schedule follow-up checkpoint"
+    ],
+    "_continuity_check": "pass"
+  },
+  {
+    "checkin_id": "C010",
+    "account_id": "A018",
+    "objectives": [
+      "Advance: Governance plan",
+      "Confirm owner + dated next steps"
+    ],
+    "continuity_items": [
+      {
+        "item": "Draft phased rollout approach",
+        "status": "open \u2014 verify before call"
+      }
+    ],
+    "talking_points": [
+      "Topic: Governance plan",
+      "Topic: multi-team adoption",
+      "Usage trend: growing; health 86 (was 79)"
+    ],
+    "risks_to_address": [
+      "Strong account; expansion signal from platform team"
+    ],
+    "success_criteria": "Customer agrees to a dated plan on 'Governance plan' and confirms engagement before renewal 2026-10-30",
+    "post_call_actions": [
+      "Send recap within 4h with owners/dates",
+      "Update health watchlist and schedule follow-up checkpoint"
+    ],
+    "_continuity_check": "pass"
+  },
+  {
+    "checkin_id": "C011",
+    "account_id": "A001",
+    "objectives": [
+      "Advance: Dashboard export issue",
+      "Confirm owner + dated next steps"
+    ],
+    "continuity_items": [
+      {
+        "item": "Investigate reporting data issue",
+        "status": "open \u2014 verify before call"
+      }
+    ],
+    "talking_points": [
+      "Topic: Dashboard export issue",
+      "Topic: adoption decline",
+      "Usage trend: declining; health 72 (was 81)",
+      "Open ticket T010: Customer asks why dashboard exports are missing recent data"
+    ],
+    "risks_to_address": [
+      "At-risk renewal; adoption drop in reporting module"
+    ],
+    "success_criteria": "Customer agrees to a dated plan on 'Dashboard export issue' and confirms engagement before renewal 2026-07-15",
+    "post_call_actions": [
+      "Send recap within 4h with owners/dates",
+      "Update health watchlist and schedule follow-up checkpoint"
+    ],
+    "_continuity_check": "pass"
+  },
+  {
+    "checkin_id": "C012",
+    "account_id": "A002",
+    "objectives": [
+      "Advance: Sync failures",
+      "Confirm owner + dated next steps"
+    ],
+    "continuity_items": [
+      {
+        "item": "Escalate integration logs",
+        "status": "open \u2014 verify before call"
+      }
+    ],
+    "talking_points": [
+      "Topic: Sync failures",
+      "Topic: technical escalation",
+      "Usage trend: flat; health 61 (was 69)",
+      "Open ticket T002: Customer asks why integration sync has failed three times this week"
+    ],
+    "risks_to_address": [
+      "Multiple unresolved integrations tickets"
+    ],
+    "success_criteria": "Customer agrees to a dated plan on 'Sync failures' and confirms engagement before renewal 2026-06-30",
+    "post_call_actions": [
+      "Send recap within 4h with owners/dates",
+      "Update health watchlist and schedule follow-up checkpoint"
+    ],
+    "_continuity_check": "pass"
+  }
+]

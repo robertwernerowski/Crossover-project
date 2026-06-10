@@ -1,0 +1,54 @@
+{
+  "segment_name": "sharp_decliners_q2",
+  "root_cause_hypothesis": "Declines cluster around lost champions and stalled implementations rather than product dissatisfaction; engagement collapsed before sentiment did.",
+  "intervention": {
+    "play": "Champion-rebuild + implementation-unblock sprint (2 weeks)",
+    "per_account_steps": [
+      {
+        "account_id": "A004",
+        "step": "Map stakeholders; secure a new executive sponsor meeting this week"
+      },
+      {
+        "account_id": "A008",
+        "step": "Technical escalation review with support engineering; unblock rollout"
+      },
+      {
+        "account_id": "A014",
+        "step": "Adoption reset call: re-anchor use case, agree success plan with dates"
+      },
+      {
+        "account_id": "A017",
+        "step": "Map stakeholders; secure a new executive sponsor meeting this week"
+      }
+    ],
+    "owner": "CS team lead (AI system drafts outreach, tracks completion)",
+    "deploy_by": "2026-05-08"
+  },
+  "measurement_plan": {
+    "metrics": [
+      {
+        "name": "avg health score (segment)",
+        "baseline": "50.0",
+        "target": "+8 pts"
+      },
+      {
+        "name": "weekly active users (segment)",
+        "baseline": "per usage_events 2026-04-24",
+        "target": "+15%"
+      },
+      {
+        "name": "named champion coverage",
+        "baseline": "1/4 accounts",
+        "target": "4/4 accounts"
+      }
+    ],
+    "checkpoint_date": "2026-05-15",
+    "decision_rule": "If >=2 metrics hit target: expand play to next decile. If 1: iterate messaging and re-run 1 week. If 0: escalate segment to leadership with churn-reserve recommendation."
+  },
+  "_segment_members": [
+    "A004",
+    "A008",
+    "A014",
+    "A017"
+  ]
+}

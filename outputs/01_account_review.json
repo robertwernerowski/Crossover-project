@@ -1,0 +1,168 @@
+{
+  "screened": 18,
+  "flagged": 8,
+  "screen_scores": {
+    "A001": 25,
+    "A002": 60,
+    "A003": 0,
+    "A004": 85,
+    "A005": 55,
+    "A006": 0,
+    "A007": 0,
+    "A008": 100,
+    "A009": 15,
+    "A010": 55,
+    "A011": 0,
+    "A012": 35,
+    "A013": 0,
+    "A014": 90,
+    "A015": 0,
+    "A016": 15,
+    "A017": 85,
+    "A018": 0
+  },
+  "briefs": [
+    {
+      "account_id": "A002",
+      "risk_level": "high",
+      "risk_types": [
+        "renewal",
+        "sentiment"
+      ],
+      "drivers": [
+        "health score weak at 61",
+        "health dropped 8 pts since last period",
+        "7 tickets in 30d",
+        "NPS 4"
+      ],
+      "recommended_action": "Same-week save plan: CSM call within 48h, address 'health score weak at 61'",
+      "needs_human": false,
+      "rationale": "Risk score 60: health score weak at 61; health dropped 8 pts since last period"
+    },
+    {
+      "account_id": "A004",
+      "risk_level": "high",
+      "risk_types": [
+        "churn",
+        "sentiment"
+      ],
+      "drivers": [
+        "health score critical at 54",
+        "health dropped 19 pts since last period",
+        "product usage declining",
+        "5 tickets in 30d"
+      ],
+      "recommended_action": "Same-week save plan: CSM call within 48h, address 'health score critical at 54'",
+      "needs_human": false,
+      "rationale": "Risk score 85: health score critical at 54; health dropped 19 pts since last period"
+    },
+    {
+      "account_id": "A005",
+      "risk_level": "medium",
+      "risk_types": [
+        "churn",
+        "renewal"
+      ],
+      "drivers": [
+        "health score weak at 67",
+        "health dropped 9 pts since last period",
+        "product usage declining",
+        "renewal in 27d with sub-par health"
+      ],
+      "recommended_action": "Add to weekly watchlist; targeted enablement outreach this week",
+      "needs_human": true,
+      "rationale": "Risk score 55: health score weak at 67; health dropped 9 pts since last period"
+    },
+    {
+      "account_id": "A008",
+      "risk_level": "high",
+      "risk_types": [
+        "churn",
+        "renewal",
+        "implementation",
+        "sentiment"
+      ],
+      "drivers": [
+        "health score critical at 48",
+        "health dropped 18 pts since last period",
+        "product usage declining",
+        "9 tickets in 30d"
+      ],
+      "recommended_action": "Same-week save plan: CSM call within 48h, address 'health score critical at 48'",
+      "needs_human": true,
+      "rationale": "Risk score 100: health score critical at 48; health dropped 18 pts since last period"
+    },
+    {
+      "account_id": "A010",
+      "risk_level": "medium",
+      "risk_types": [
+        "churn"
+      ],
+      "drivers": [
+        "health score critical at 58",
+        "product usage declining",
+        "6 tickets in 30d"
+      ],
+      "recommended_action": "Add to weekly watchlist; targeted enablement outreach this week",
+      "needs_human": false,
+      "rationale": "Risk score 55: health score critical at 58; product usage declining"
+    },
+    {
+      "account_id": "A012",
+      "risk_level": "medium",
+      "risk_types": [
+        "sentiment"
+      ],
+      "drivers": [
+        "health score weak at 63",
+        "8 tickets in 30d",
+        "NPS 4"
+      ],
+      "recommended_action": "Add to weekly watchlist; targeted enablement outreach this week",
+      "needs_human": false,
+      "rationale": "Risk score 35: health score weak at 63; 8 tickets in 30d"
+    },
+    {
+      "account_id": "A014",
+      "risk_level": "high",
+      "risk_types": [
+        "churn",
+        "renewal",
+        "sentiment"
+      ],
+      "drivers": [
+        "health score critical at 52",
+        "health dropped 19 pts since last period",
+        "product usage declining",
+        "NPS 3"
+      ],
+      "recommended_action": "Same-week save plan: CSM call within 48h, address 'health score critical at 52'",
+      "needs_human": false,
+      "rationale": "Risk score 90: health score critical at 52; health dropped 19 pts since last period"
+    },
+    {
+      "account_id": "A017",
+      "risk_level": "high",
+      "risk_types": [
+        "churn",
+        "sentiment"
+      ],
+      "drivers": [
+        "health score critical at 46",
+        "health dropped 18 pts since last period",
+        "product usage declining",
+        "6 tickets in 30d"
+      ],
+      "recommended_action": "Same-week save plan: CSM call within 48h, address 'health score critical at 46'",
+      "needs_human": false,
+      "rationale": "Risk score 85: health score critical at 46; health dropped 18 pts since last period"
+    }
+  ],
+  "expansion_candidates": [
+    "A003",
+    "A006",
+    "A011",
+    "A015",
+    "A018"
+  ]
+}

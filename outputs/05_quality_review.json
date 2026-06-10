@@ -1,0 +1,220 @@
+{
+  "reviews": [
+    {
+      "output_id": "O001",
+      "standard_results": [
+        {
+          "standard_id": "QS001",
+          "pass": false,
+          "evidence": "not met per QS001 heuristic on draft text"
+        },
+        {
+          "standard_id": "QS002",
+          "pass": false,
+          "evidence": "not met per QS002 heuristic on draft text"
+        },
+        {
+          "standard_id": "QS003",
+          "pass": true,
+          "evidence": "met per QS003 heuristic on draft text"
+        },
+        {
+          "standard_id": "QS005",
+          "pass": false,
+          "evidence": "not met per QS005 heuristic on draft text"
+        }
+      ],
+      "verdict": "block_and_escalate",
+      "revision_instructions": "Failed QS001, QS002, QS005 on a $240,000 account \u2014 route to CSM before sending.",
+      "rewritten_draft": null,
+      "_heuristic_red_flags": [
+        "draft under ~35 words \u2014 unlikely to be actionable",
+        "vague timing language with no concrete commitment"
+      ]
+    },
+    {
+      "output_id": "O002",
+      "standard_results": [
+        {
+          "standard_id": "QS001",
+          "pass": true,
+          "evidence": "met per QS001 heuristic on draft text"
+        },
+        {
+          "standard_id": "QS002",
+          "pass": false,
+          "evidence": "not met per QS002 heuristic on draft text"
+        },
+        {
+          "standard_id": "QS004",
+          "pass": false,
+          "evidence": "not met per QS004 heuristic on draft text"
+        }
+      ],
+      "verdict": "block_and_escalate",
+      "revision_instructions": "Failed QS002, QS004 on a $175,000 account \u2014 route to CSM before sending.",
+      "rewritten_draft": null,
+      "_heuristic_red_flags": [
+        "draft under ~35 words \u2014 unlikely to be actionable"
+      ]
+    },
+    {
+      "output_id": "O003",
+      "standard_results": [
+        {
+          "standard_id": "QS001",
+          "pass": true,
+          "evidence": "met per QS001 heuristic on draft text"
+        },
+        {
+          "standard_id": "QS002",
+          "pass": false,
+          "evidence": "not met per QS002 heuristic on draft text"
+        },
+        {
+          "standard_id": "QS003",
+          "pass": true,
+          "evidence": "met per QS003 heuristic on draft text"
+        }
+      ],
+      "verdict": "revise",
+      "revision_instructions": "Fix QS002: add account-specific detail, concrete next steps with owner and date.",
+      "rewritten_draft": null,
+      "_heuristic_red_flags": [
+        "draft under ~35 words \u2014 unlikely to be actionable"
+      ]
+    },
+    {
+      "output_id": "O004",
+      "standard_results": [
+        {
+          "standard_id": "QS001",
+          "pass": false,
+          "evidence": "not met per QS001 heuristic on draft text"
+        },
+        {
+          "standard_id": "QS002",
+          "pass": false,
+          "evidence": "not met per QS002 heuristic on draft text"
+        },
+        {
+          "standard_id": "QS006",
+          "pass": false,
+          "evidence": "not met per QS006 heuristic on draft text"
+        }
+      ],
+      "verdict": "block_and_escalate",
+      "revision_instructions": "Failed QS001, QS002, QS006 on a $16,000 account \u2014 route to CSM before sending.",
+      "rewritten_draft": null,
+      "_heuristic_red_flags": [
+        "draft under ~35 words \u2014 unlikely to be actionable",
+        "vague timing language with no concrete commitment"
+      ]
+    },
+    {
+      "output_id": "O005",
+      "standard_results": [
+        {
+          "standard_id": "QS002",
+          "pass": true,
+          "evidence": "met per QS002 heuristic on draft text"
+        },
+        {
+          "standard_id": "QS004",
+          "pass": true,
+          "evidence": "met per QS004 heuristic on draft text"
+        }
+      ],
+      "verdict": "approve",
+      "revision_instructions": null,
+      "rewritten_draft": null,
+      "_heuristic_red_flags": [
+        "draft under ~35 words \u2014 unlikely to be actionable"
+      ]
+    },
+    {
+      "output_id": "O006",
+      "standard_results": [
+        {
+          "standard_id": "QS003",
+          "pass": false,
+          "evidence": "not met per QS003 heuristic on draft text"
+        },
+        {
+          "standard_id": "QS004",
+          "pass": true,
+          "evidence": "met per QS004 heuristic on draft text"
+        },
+        {
+          "standard_id": "QS005",
+          "pass": false,
+          "evidence": "not met per QS005 heuristic on draft text"
+        }
+      ],
+      "verdict": "block_and_escalate",
+      "revision_instructions": "Failed QS003, QS005 on a $74,000 account \u2014 route to CSM before sending.",
+      "rewritten_draft": null,
+      "_heuristic_red_flags": [
+        "draft under ~35 words \u2014 unlikely to be actionable",
+        "absolute/overstated risk language"
+      ]
+    },
+    {
+      "output_id": "O007",
+      "standard_results": [
+        {
+          "standard_id": "QS001",
+          "pass": true,
+          "evidence": "met per QS001 heuristic on draft text"
+        },
+        {
+          "standard_id": "QS002",
+          "pass": false,
+          "evidence": "not met per QS002 heuristic on draft text"
+        }
+      ],
+      "verdict": "revise",
+      "revision_instructions": "Fix QS002: add account-specific detail, concrete next steps with owner and date.",
+      "rewritten_draft": null,
+      "_heuristic_red_flags": [
+        "draft under ~35 words \u2014 unlikely to be actionable",
+        "vague timing language with no concrete commitment"
+      ]
+    },
+    {
+      "output_id": "O008",
+      "standard_results": [
+        {
+          "standard_id": "QS002",
+          "pass": true,
+          "evidence": "met per QS002 heuristic on draft text"
+        },
+        {
+          "standard_id": "QS004",
+          "pass": true,
+          "evidence": "met per QS004 heuristic on draft text"
+        },
+        {
+          "standard_id": "QS005",
+          "pass": true,
+          "evidence": "met per QS005 heuristic on draft text"
+        }
+      ],
+      "verdict": "approve",
+      "revision_instructions": null,
+      "rewritten_draft": null,
+      "_heuristic_red_flags": [
+        "draft under ~35 words \u2014 unlikely to be actionable"
+      ]
+    }
+  ],
+  "verdict_counts": {
+    "approve": 2,
+    "revise": 2,
+    "block_and_escalate": 4
+  },
+  "judge_vs_heuristic_disagreements": [
+    "O005",
+    "O008"
+  ]
+}
