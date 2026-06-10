@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Customer Success AI — Operations Console</title>
+<style>
+:root{--navy:#10243e;--line:#e6eaf0;--mut:#67788e}
+*{box-sizing:border-box}
+body{font-family:-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;margin:0;background:#f5f6f8;color:#1c2733}
+header{background:var(--navy);color:#fff;padding:18px 28px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
+header h1{margin:0 0 3px;font-size:20px}header p{margin:0;opacity:.7;font-size:12.5px}
+button#run{background:#2eb872;color:#fff;border:0;border-radius:8px;padding:11px 22px;font-size:15px;font-weight:700;cursor:pointer}
+button#run:disabled{background:#3a4d66;cursor:default}
+#status{padding:10px 28px;background:#0c1b30;color:#9fc3ef;font-size:13px;font-family:ui-monospace,Menlo,Consolas,monospace;min-height:38px}
+main{max-width:1200px;margin:18px auto;padding:0 16px}
+.kpis{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:16px}
+.kpi{background:#fff;border-radius:10px;box-shadow:0 1px 3px rgba(16,36,62,.08);padding:12px 18px;min-width:118px}
+.kpi b{display:block;font-size:22px;color:var(--navy)}.kpi span{font-size:11.5px;color:var(--mut)}
+nav{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
+nav button{border:1px solid var(--line);background:#fff;border-radius:18px;padding:7px 15px;font-size:13px;cursor:pointer;color:#33445c}
+nav button.on{background:var(--navy);color:#fff;border-color:var(--navy)}
+section{background:#fff;border-radius:10px;box-shadow:0 1px 3px rgba(16,36,62,.08);padding:18px 22px;margin-bottom:16px}
+h2{font-size:15.5px;margin:0 0 10px;color:var(--navy)}
+table{border-collapse:collapse;width:100%;font-size:13px}
+th{background:#eef1f5;text-align:left;padding:7px 9px;color:#44546a;white-space:nowrap}
+td{border-top:1px solid var(--line);padding:7px 9px;vertical-align:top}
+.tag{display:inline-block;border-radius:10px;padding:2px 9px;font-size:11.5px;font-weight:600;white-space:nowrap}
+.high,.escalate,.block_and_escalate,.FAIL{background:#fdecea;color:#b3261e}
+.medium,.scheduled_follow_up,.revise,.P2{background:#fef3df;color:#9a6a00}
+.low,.immediate_resolution,.approve,.pass{background:#e6f4ea;color:#1e7b34}
+.note{font-size:12px;color:var(--mut);margin:8px 0 0}
+details{margin:6px 0;border:1px solid var(--line);border-radius:8px;padding:8px 12px}
+summary{cursor:pointer;font-size:13px;font-weight:600;color:#2b5b9e}
+ul{margin:6px 0 6px 18px;padding:0;font-size:13px}li{margin:3px 0}
+.flag{color:#b3261e;font-weight:600}
+.evt{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:12.5px;padding:6px 10px;border-left:3px solid #2b5b9e;background:#f2f6fc;border-radius:0 6px 6px 0;margin:6px 0}
+.evt.guardrail{border-color:#b3261e;background:#fdf2f1}
+.evt.retry{border-color:#9a6a00;background:#fdf8ec}
+#welcome{padding:30px;text-align:center;color:#44546a}
+.err{background:#fdecea;color:#b3261e;padding:14px 18px;border-radius:8px;font-size:13.5px}
+.draft{background:#f7f8fa;border-left:3px solid #2eb872;padding:8px 12px;font-size:12.5px;border-radius:0 6px 6px 0;margin-top:6px}
+</style>
+</head>
+<body>
+<header>
+  <div>
+    <h1>Customer Success AI — Operations Console</h1>
+    <p>750-account portfolio simulation (18-account synthetic dataset) · business day 2026-05-01 ·
+       model routing: rules ($0) → Haiku 4.5 → Sonnet 4.6 → Opus 4.8</p>
+  </div>
+  <button id="run">▶ Run daily cycle</button>
+</header>
+<div id="status">Ready. Press “Run daily cycle” to process the portfolio: account review → prioritization → issue triage → check-in prep → quality review → intervention design.</div>
+<main>
+  <div class="kpis" id="kpis"></div>
+  <nav id="tabs" style="display:none"></nav>
+  <div id="content"><div id="welcome">
+    <h2>What this tool does</h2>
+    <p style="max-width:680px;margin:10px auto;font-size:13.5px">
+    It runs the daily operating cycle of an AI customer-success system over the synthetic dataset in
+    <code>data/</code>: scores every account (free, deterministic), writes risk briefs for flagged ones,
+    builds today's prioritized attention list, routes all inbound issues (with escalation guardrails),
+    prepares the upcoming customer check-ins with continuity from prior calls, reviews junior drafts
+    against the quality standards, designs an intervention for the declining segment — and accounts for
+    every simulated token spent.</p>
+  </div></div>
+</main>
+<script src="app.js"></script>
+<script>
+const $ = id => document.getElementById(id);
+const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const tag = v => `<span class="tag ${esc(v)}">${esc(String(v).replace(/_/g," "))}</span>`;
+const usd = v => "$" + v.toFixed(v < 0.01 ? 5 : v < 1 ? 4 : 2);
+
+let RES = null;
+
+async function loadData() {
+  const get = async n => parseCSV(await (await fetch("data/" + n)).text());
+  return { accounts: await get("accounts.csv"), usage: await get("usage_events.csv"),
+           tickets: await get("support_tickets.csv"), notes: await get("call_notes.csv"),
+           checkins: await get("scheduled_checkins.csv"), junior: await get("junior_outputs.csv") };
+}
+
+const sleep = ms => new Promise(r => setTimeout(r, ms));
+
+$("run").onclick = async () => {
+  $("run").disabled = true;
+  const stages = [
+    "S1 account_review … screening 18 accounts (rules, $0) → Haiku briefs for flagged accounts [Batch API]",
+    "S2 prioritization … Sonnet ranks attention list + portfolio patterns",
+    "S3 issue_triage … Haiku routes 12 inbound issues; guardrails check every route; Sonnet writes escalation packets",
+    "S4 checkin_prep … Sonnet briefs for 12 scheduled check-ins (continuity from prior calls)",
+    "S5 quality_review … Sonnet judges 8 junior drafts against the quality standards",
+    "S6 interventions … declining segment detected → Opus designs the corrective play",
+  ];
+  try {
+    $("status").textContent = "Loading dataset from data/*.csv …";
+    const data = await loadData();
+    for (const s of stages) { $("status").textContent = s; await sleep(420); }
+    RES = runEngine(data);
+    $("status").textContent =
+      `Done. ${RES.flagged.length} accounts flagged · ${RES.routes.length} issues routed (${RES.packets.length} escalated) · ` +
+      `${RES.briefs.length} check-in briefs · ${RES.reviews.length} drafts reviewed · 1 intervention designed · ` +
+      `${RES.runTokens.toLocaleString()} tokens ≈ ${usd(RES.runCost)} this cycle`;
+    renderAll();
+  } catch (e) {
+    $("content").innerHTML = `<div class="err"><b>Could not load the dataset.</b> ${esc(e.message)}<br>
+      If you opened this file directly from disk (file://), browsers block CSV loading — use the hosted page
+      or run <code>python3 -m http.server</code> in the repo folder and open <code>http://localhost:8000</code>.</div>`;
+    $("status").textContent = "Failed to load data.";
+  }
+  $("run").disabled = false;
+  $("run").textContent = "↻ Re-run daily cycle";
+};
+
+const TABS = [
+  ["overview", "Overview"], ["accounts", "Account review"], ["issues", "Inbound issues"],
+  ["checkins", "Check-ins"], ["quality", "Quality review"], ["intervention", "Intervention"],
+  ["costs", "Tokens & cost"], ["log", "Reliability log"],
+];
+let activeTab = "overview";
+
+function renderAll() {
+  const k = [
+    [RES.flagged.length + "/" + Object.keys(RES.screens).length, "accounts flagged"],
+    [RES.expansion.length, "expansion candidates"],
+    [RES.routes.length, "issues routed"],
+    [RES.packets.length, "escalations"],
+    [RES.briefs.length, "check-in briefs"],
+    [RES.reviews.length, "drafts reviewed"],
+    [RES.intervention ? RES.intervention.members.length : 0, "accts in intervention"],
+    [usd(RES.runCost), RES.runTokens.toLocaleString() + " tokens"],
+  ];
+  $("kpis").innerHTML = k.map(([v, l]) => `<div class="kpi"><b>${esc(v)}</b><span>${esc(l)}</span></div>`).join("");
+  $("tabs").style.display = "flex";
+  $("tabs").innerHTML = TABS.map(([id, label]) =>
+    `<button data-t="${id}" class="${id === activeTab ? "on" : ""}">${label}</button>`).join("");
+  document.querySelectorAll("#tabs button").forEach(b => b.onclick = () => { activeTab = b.dataset.t; renderAll(); });
+  $("content").innerHTML = VIEWS[activeTab]();
+}
+
+const VIEWS = {
+overview() {
+  const att = RES.plan.attention_list.map(r =>
+    `<tr><td>${r.rank}</td><td><b>${esc(r.account_id)}</b> ${esc(r.account_name)}</td><td>${esc(r.reason)}</td><td>${esc(r.owner_action)}</td></tr>`).join("");
+  const pat = RES.plan.portfolio_patterns.map(p =>
+    `<tr><td>${esc(p.pattern)}</td><td>${esc(p.accounts.join(", "))}</td><td>${esc(p.suggested_response)}</td></tr>`).join("");
+  const exp = RES.plan.expansion_watchlist.map(w => `<b>${esc(w.account_id)}</b> ${esc(w.account_name)} (${esc(w.signal)})`).join(" · ");
+  return `<section><h2>Today's attention list — where a CSM should spend the morning</h2>
+    <table><tr><th>#</th><th>Account</th><th>Why now</th><th>Owner action</th></tr>${att}</table>
+    <p class="note">Expansion watchlist: ${exp}</p></section>
+    <section><h2>Portfolio-level patterns</h2>
+    <table><tr><th>Pattern</th><th>Accounts</th><th>Suggested response</th></tr>${pat}</table></section>`;
+},
+accounts() {
+  const rows = RES.flagged.map(f => `<tr><td><b>${esc(f.acct.account_id)}</b> ${esc(f.acct.account_name)}</td>
+    <td>${tag(f.brief.risk_level)}</td><td>${f.sig.risk_score}</td><td>${esc(f.brief.risk_types.join(", "))}</td>
+    <td>${esc(f.brief.drivers.join("; "))}</td><td>${esc(f.brief.recommended_action)}</td>
+    <td>${f.brief.needs_human ? '<span class="flag">yes</span>' : "no"}</td></tr>`).join("");
+  const screens = Object.entries(RES.screens).map(([id, s]) =>
+    `<tr><td>${esc(id)}</td><td>${s.risk_score}</td><td>${s.risk_score >= 35 ? tag("high") + " flagged → LLM brief" : tag("pass") + " healthy — no tokens spent"}</td></tr>`).join("");
+  return `<section><h2>Risk briefs (Haiku 4.5, Batch API) — ${RES.flagged.length} flagged accounts</h2>
+    <table><tr><th>Account</th><th>Risk</th><th>Score</th><th>Types</th><th>Drivers</th><th>Recommended action</th><th>Needs human</th></tr>${rows}</table></section>
+    <section><h2>Tier-0 deterministic screen — all accounts, $0</h2>
+    <table><tr><th>Account</th><th>Risk score</th><th>Disposition</th></tr>${screens}</table>
+    <p class="note">Only flagged accounts consume LLM tokens — this is what makes the system affordable at 750-account scale.</p></section>`;
+},
+issues() {
+  const rows = RES.routes.map(r => `<tr><td><b>${esc(r.ticket_id)}</b><br><span style="color:var(--mut);font-size:12px">${esc(r.account_name)}</span></td>
+    <td>${esc(r.issue_summary)}</td><td>${tag(r.final_route)}${r.guardrail_override ? `<br><span class="flag" style="font-size:11px">guardrail: ${esc(r.guardrail_override)}</span>` : ""}</td>
+    <td>${esc(r.priority)}</td><td>${esc(r.owner)}</td><td>${esc(r.first_action)}${r.draft_reply ? `<div class="draft"><b>Draft reply:</b> ${esc(r.draft_reply)}</div>` : ""}</td></tr>`).join("");
+  const pk = RES.packets.map(p => `<details><summary>${esc(p.ticket_id)} — ${esc(p.account_name)} · $${p.revenue_at_risk_usd.toLocaleString()} at risk</summary>
+    <ul><li><b>Assessment:</b> ${esc(p.severity_assessment)}</li><li><b>Owner:</b> ${esc(p.recommended_owner)} · <b>deadline:</b> ${esc(p.deadline)}</li>
+    ${p.talking_points.map(t => `<li>${esc(t)}</li>`).join("")}<li><b>Fallback:</b> ${esc(p.fallback_plan)}</li></ul></details>`).join("");
+  return `<section><h2>Inbound issue routing (Haiku 4.5 + deterministic guardrails)</h2>
+    <table><tr><th>Ticket</th><th>Issue</th><th>Route</th><th>Pri</th><th>Owner</th><th>First action / draft</th></tr>${rows}</table></section>
+    <section><h2>Escalation packets (Sonnet 4.6) — ready for a human owner within one business day</h2>${pk}</section>`;
+},
+checkins() {
+  return `<section><h2>Check-in briefs (Sonnet 4.6) — every brief carries forward prior-call commitments</h2>` +
+    RES.briefs.map(b => `<details><summary>${esc(b.checkin_id)} · ${esc(b.scheduled_date)} — ${esc(b.account_name)}
+      (${esc(b.checkin_type)}, ${esc(b.priority)}) · continuity ${tag(b.continuity_check)}</summary>
+      <b>Objectives:</b><ul>${b.objectives.map(o => `<li>${esc(o)}</li>`).join("")}</ul>
+      <b>Carry-over from last call:</b><ul>${b.continuity_items.map(i => `<li>${esc(i.item)} — <i>${esc(i.status)}</i></li>`).join("") || "<li>none on file</li>"}</ul>
+      <b>Talking points:</b><ul>${b.talking_points.map(t => `<li>${esc(t)}</li>`).join("")}</ul>
+      <b>Success criteria:</b> ${esc(b.success_criteria)}<br>
+      <b>Post-call actions:</b><ul>${b.post_call_actions.map(a => `<li>${esc(a)}</li>`).join("")}</ul></details>`).join("") + `</section>`;
+},
+quality() {
+  const counts = {};
+  RES.reviews.forEach(r => counts[r.verdict] = (counts[r.verdict] || 0) + 1);
+  return `<section><h2>Output quality review (Sonnet 4.6 as judge) — ${Object.entries(counts).map(([k, v]) => `${v} ${k.replace(/_/g, " ")}`).join(" · ")}</h2>` +
+    RES.reviews.map(r => `<details><summary>${esc(r.output_id)} · ${esc(r.output_type)} (${esc(r.account_id)}) — ${tag(r.verdict)}${r.disagreement ? ' <span class="flag">⚠ heuristic disagreement</span>' : ""}</summary>
+      <div class="draft">${esc(r.draft_text)}</div>
+      <ul>${r.standard_results.map(s => `<li>${esc(s.standard_id)} ${esc(s.name)}: ${s.pass ? "PASS" : '<span class="flag">FAIL</span>'}</li>`).join("")}</ul>
+      ${r.revision_instructions ? `<b>Instructions:</b> ${esc(r.revision_instructions)}` : ""}
+      ${r.red_flags.length ? `<p class="note">Heuristic red flags: ${esc(r.red_flags.join("; "))}</p>` : ""}</details>`).join("") + `</section>`;
+},
+intervention() {
+  const iv = RES.intervention;
+  if (!iv) return `<section><h2>No declining segment detected this period</h2></section>`;
+  return `<section><h2>Targeted intervention (Opus 4.8) — segment: ${esc(iv.segment_name)} (${esc(iv.members.join(", "))})</h2>
+    <p><b>Root-cause hypothesis:</b> ${esc(iv.root_cause_hypothesis)}</p>
+    <p><b>Play:</b> ${esc(iv.intervention.play)} · <b>owner:</b> ${esc(iv.intervention.owner)} · <b>deploy by:</b> ${esc(iv.intervention.deploy_by)}</p>
+    <ul>${iv.intervention.per_account_steps.map(s => `<li><b>${esc(s.account_id)}</b> ${esc(s.account_name)}: ${esc(s.step)}</li>`).join("")}</ul>
+    <h2 style="margin-top:16px">Measurement plan — did it work?</h2>
+    <table><tr><th>Metric</th><th>Baseline</th><th>Target</th></tr>
+    ${iv.measurement_plan.metrics.map(m => `<tr><td>${esc(m.name)}</td><td>${esc(m.baseline)}</td><td>${esc(m.target)}</td></tr>`).join("")}</table>
+    <p class="note"><b>Checkpoint:</b> ${esc(iv.measurement_plan.checkpoint_date)} · <b>Decision rule:</b> ${esc(iv.measurement_plan.decision_rule)}</p></section>`;
+},
+costs() {
+  const rows = Object.entries(RES.ledger).map(([st, s]) =>
+    `<tr><td>${esc(st)}</td><td>${esc(s.model)}</td><td>${s.calls}</td><td>${s.inTok.toLocaleString()}</td>
+     <td>${s.cachedTok.toLocaleString()}</td><td>${s.outTok.toLocaleString()}</td><td>${s.retries}</td><td>${usd(s.usd)}</td></tr>`).join("");
+  const proj = RES.projection.map(p =>
+    `<tr><td>${esc(p.stage)}</td><td>${esc(p.desc)}</td><td>${p.units.toLocaleString()}</td><td>${usd(p.perUnit)}</td><td>${usd(p.annual)}</td></tr>`).join("");
+  return `<section><h2>This cycle — simulated token usage by stage</h2>
+    <table><tr><th>Stage</th><th>Model</th><th>Calls</th><th>Input tok</th><th>Cached tok</th><th>Output tok</th><th>Retries</th><th>Effective cost</th></tr>
+    ${rows}<tr><td><b>Total</b></td><td></td><td></td><td></td><td></td><td></td><td></td><td><b>${usd(RES.runCost)}</b></td></tr></table>
+    <p class="note">Effective cost includes prompt caching (0.1× cached prefix reads) and the 50% Batch API discount on the daily review.</p></section>
+    <section><h2>Annual projection at 750-account scale vs the $50,000 budget</h2>
+    <table><tr><th>Workflow</th><th>Volume basis</th><th>Units/yr</th><th>Cost/unit</th><th>Annual</th></tr>${proj}
+    <tr><td><b>Total</b></td><td></td><td></td><td></td><td><b>${usd(RES.annualCost)}</b></td></tr></table>
+    <p class="note">Lower bound — this synthetic dataset's records are ~5–10× smaller than production context.
+    Full production-sized math, scenarios and budget allocation: <a href="COSTS.md">COSTS.md</a>.</p></section>`;
+},
+log() {
+  return `<section><h2>Reliability events this cycle — failures handled, never silent</h2>` +
+    RES.events.map(e => `<div class="evt ${esc(e.type)}">[${esc(e.type)}] ${esc(e.text)}</div>`).join("") +
+    `<p class="note">Every model response is schema-validated (retry once, then human queue); deterministic guardrails floor
+     the routing decisions; judge verdicts are cross-checked against independent heuristics.</p></section>`;
+},
+};
+</script>
+</body>
+</html>
